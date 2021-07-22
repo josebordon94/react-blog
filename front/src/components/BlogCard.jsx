@@ -1,7 +1,6 @@
 import React from 'react'
 import {
   Card,
-  CardActionArea,
   CardMedia,
   CardContent,
   CardActions,
@@ -12,8 +11,9 @@ import {
 import DeleteIcon from '@material-ui/icons/Delete'
 import EditIcon from '@material-ui/icons/Edit'
 import ImportContactsIcon from '@material-ui/icons/ImportContacts'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core'
+import postsAPI from '../services/posts'
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -24,18 +24,29 @@ const useStyles = makeStyles((theme) => ({
   },
   cardActions: {
     display: 'flex',
-    margin: '0 10px',
+    margin: '0 5px',
     justifyContent: 'space-between',
   },
   button: {
-    margin: theme.spacing(0.2),
-    flexBasis: '100%',
+    width: '10rem',
   },
 }))
 
 export default function BlogCard(props) {
-  const { title, id, image, category } = props
+  const { title, id, image, category, reload } = props
   const classes = useStyles()
+  const history = useHistory()
+
+  const handleDelete = async () => {
+    const res = await postsAPI.delete.deletePost(id)
+    console.log(res)
+    reload()
+  }
+
+  const handleEdit = () => {
+    history.push('/edit/' + id)
+  }
+
   return (
     <Card className={classes.card}>
       <CardMedia
@@ -44,7 +55,7 @@ export default function BlogCard(props) {
         title="Contemplative Reptile"
       />
       <CardContent>
-        <Typography gutterBottom variant="h5" component="h2">
+        <Typography gutterBottom variant="h6" component="h2">
           {title}
         </Typography>
         <Typography variant="body2" color="textSecondary" component="p">
@@ -54,9 +65,9 @@ export default function BlogCard(props) {
       <CardActions className={classes.cardActions}>
         <Link to={'/' + id}>
           <Button
+            className={classes.button}
             variant="contained"
             color="primary"
-            className={classes.button}
             startIcon={<ImportContactsIcon />}
           >
             Leer
@@ -68,8 +79,12 @@ export default function BlogCard(props) {
           color="secondary"
           aria-label="contained primary button group"
         >
-          <Button startIcon={<EditIcon />}>Editar</Button>
-          <Button startIcon={<DeleteIcon />}>Eliminar</Button>
+          <Button>
+            <EditIcon onClick={handleEdit} />
+          </Button>
+          <Button onClick={handleDelete}>
+            <DeleteIcon />
+          </Button>
         </ButtonGroup>
       </CardActions>
     </Card>

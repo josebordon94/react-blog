@@ -19,4 +19,9 @@ export default {
       return apiServer.delete(`/posts/${post_id}`)
     },
   },
+  patch: {
+    editPost(data) {
+      return apiServer.patch(`/posts/${data.id}`, data)
+    },
+  },
 }

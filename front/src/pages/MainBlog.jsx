@@ -12,6 +12,11 @@ const useStyles = makeStyles((theme) => ({
   blogsContainer: {
     paddingTop: theme.spacing(3),
   },
+  card: {
+    height: '100%',
+    paddingTop: 5,
+    backgroundColor: '#fff',
+  },
 }))
 
 function MainBlog() {
@@ -20,23 +25,28 @@ function MainBlog() {
   const [posts, setPosts] = useState([])
   const [loading, setLoading] = useState(true)
 
+  const getData = async function () {
+    const res = await postsAPI.get.posts()
+    console.log(res)
+    setPosts(res.data)
+    setLoading(false)
+  }
   useEffect(() => {
-    const getData = async function () {
-      const res = await postsAPI.get.posts()
-      console.log(res)
-      setPosts(res.data)
-      setLoading(false)
-    }
     getData()
   }, [])
+
+  const reload = () => {
+    setLoading(true)
+    getData()
+  }
 
   if (loading) {
     return <LinearProgress />
   }
   return (
-    <Container maxWidth="lg" className={classes.blogsContainer}>
+    <Container className={classes.blogsContainer} maxWidth="lg">
       <NewPostButton />
-      <Grid container spacing={3}>
+      <Grid container spacing={2}>
         {posts.map((post) => (
           <Grid item xs={12} sm={12} md={6} lg={4} key={post.id}>
             <BlogCard
@@ -44,6 +54,7 @@ function MainBlog() {
               category={post.category.description}
               image={post.image}
               id={post.id}
+              reload={reload}
             />
           </Grid>
         ))}

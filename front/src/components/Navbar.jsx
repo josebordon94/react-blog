@@ -67,8 +67,9 @@ const Navbar = (props) => {
     <AppBar className={classes.appBar}>
       <Toolbar>
         <Typography variant="h6" className={classes.title}>
-          Alkemy Blog
+          Blog
         </Typography>
+
         <Button
           color="inherit"
           startIcon={<TranslateIcon />}

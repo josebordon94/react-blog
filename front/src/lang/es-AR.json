@@ -1,6 +1,16 @@
 {
     "languageName" : "Español",
-
-    "mainTitle": "Alkemy Blog"
+    "newPost": "Registrar una publicación",
+    "read": "Leer",
+    "inCategory": "En categoría",
+    "category": "Categoría",
+    "title": "Título",
+    "url": "URL de la imágen",
+    "content": "Contenido",
+    "createPostTitle": "Registrar nueva publicación",
+    "editPostTitle": "Editar publicación",
+    "savePost": "Guardar nueva publicación",
+    "editPost": "Editar publicación",
+    "back": "Volver"
 
 }

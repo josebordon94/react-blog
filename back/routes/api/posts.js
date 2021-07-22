@@ -19,7 +19,9 @@ router.get('/', async (req, res) => {
 //Get one post by ID
 router.get('/:id', async (req, res) => {
   try {
-    const post = await Post.findByPk(req.params.id)
+    const post = await Post.findByPk(req.params.id, {
+      include: [{ model: Category, as: 'category' }],
+    })
     if (post === null) {
       res
         .status(404)

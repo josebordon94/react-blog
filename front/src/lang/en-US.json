@@ -1,6 +1,16 @@
 {
     "languageName" : "English",
-
-    "mainTitle": "Alkemy Blog"
+    "newPost": "Add new post",
+    "read": "Read",
+    "inCategory": "In category",
+    "category": "Category: ",
+    "title": "Title",
+    "url": "Image URL",
+    "content": "Content",
+    "createPostTitle": "Create new post",
+    "editPostTitle": "Edit post",
+    "savePost": "Save new post",
+    "editPost": "Edit post",
+    "back": "Back"
 
 }

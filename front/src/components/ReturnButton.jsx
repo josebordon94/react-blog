@@ -1,5 +1,5 @@
 import React from 'react'
-import PostAddIcon from '@material-ui/icons/PostAdd'
+import KeyboardReturnIcon from '@material-ui/icons/KeyboardReturn'
 import Button from '@material-ui/core/Button'
 import { makeStyles } from '@material-ui/core/styles'
 import { Link } from 'react-router-dom'
@@ -7,20 +7,20 @@ import { Link } from 'react-router-dom'
 const useStyles = makeStyles((theme) => ({
   button: {
     float: 'right',
-    backgroundColor: 'lightgreen',
+    backgroundColor: 'orange',
   },
 }))
 
 export default function NewPostButton() {
   const classes = useStyles()
   return (
-    <Link to="/create">
+    <Link to="/">
       <Button
         variant="contained"
         className={classes.button}
-        startIcon={<PostAddIcon />}
+        startIcon={<KeyboardReturnIcon />}
       >
-        Agregar nuevo post
+        Volver
       </Button>
     </Link>
   )

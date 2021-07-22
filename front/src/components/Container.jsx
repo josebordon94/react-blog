@@ -6,6 +6,8 @@ import Navbar from './Navbar'
 import MainBlog from '../pages/MainBlog'
 import PostDetail from '../pages/PostDetail'
 import Create from '../pages/Create'
+import Edit from '../pages/Edit'
+import Error404 from '../pages/Error404'
 
 const estilos = makeStyles((theme) => ({
   root: {
@@ -35,6 +37,8 @@ const Container = () => {
           <Switch>
             <Route path="/" exact component={MainBlog} />
             <Route path="/create" exact component={Create} />
+            <Route path="/edit/:id" exact component={Edit} />
+            <Route path="/error404" exact component={Error404} />
             <Route path="/:id" exact component={PostDetail} />
           </Switch>
         </div>

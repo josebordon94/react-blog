@@ -6,6 +6,8 @@ import Grid from '@material-ui/core/Grid'
 import postsAPI from '../services/posts'
 import LinearProgress from '../components/LinearProgress'
 import Paper from '@material-ui/core/Paper'
+import ReturnButton from '../components/ReturnButton'
+import { useHistory } from 'react-router'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -25,16 +27,20 @@ const useStyles = makeStyles((theme) => ({
 
 function PostDetail(props) {
   const classes = useStyles()
-
+  const history = useHistory()
   const [post, setPost] = useState([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const getData = async function () {
-      const res = await postsAPI.get.postDetail(props.match.params.id)
-      console.log(res)
-      setPost(res.data)
-      setLoading(false)
+      try {
+        const res = await postsAPI.get.postDetail(props.match.params.id)
+        console.log(res)
+        setPost(res.data)
+        setLoading(false)
+      } catch (error) {
+        history.push('/error404')
+      }
     }
     getData()
   }, [])
@@ -49,6 +55,9 @@ function PostDetail(props) {
           <Typography variant="h1" color="initial">
             {post.title}
           </Typography>
+          <Typography variant="subtitle2" color="initial">
+            En categoría: {post.category.description}
+          </Typography>
           <Typography
             variant="body1"
             color="initial"
@@ -62,6 +71,7 @@ function PostDetail(props) {
             <img src={'img/' + post.image} className={classes.image} />
           </Box>
         </Grid>
+        <ReturnButton />
       </Grid>
     </Paper>
   )

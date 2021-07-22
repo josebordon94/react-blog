@@ -11,6 +11,7 @@ import SaveIcon from '@material-ui/icons/Save'
 import { useHistory } from 'react-router'
 import ReturnButton from '../components/ReturnButton'
 import { FormattedMessage, useIntl } from 'react-intl'
+import LinearProgress from '../components/LinearProgress'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -45,11 +46,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export default function Create() {
+export default function Edit(props) {
   const classes = useStyles()
   let history = useHistory()
   const [loading, setLoading] = useState(true)
-  // const [selectedCategory, setSelectedCategory] = useState('')
+  const [categories, setCategories] = React.useState([])
   const [formData, setFormData] = useState({
     title: '',
     content: '',
@@ -57,15 +58,23 @@ export default function Create() {
     category_id: '',
   })
 
-  const [categories, setCategories] = React.useState([])
   useEffect(() => {
-    const getData = async function () {
+    const getPost = async function () {
+      const res = await postsAPI.get.postDetail(props.match.params.id)
+      console.log('POST ENCONTRADO: ', res)
+      setFormData(res.data)
+      setLoading(false)
+    }
+    getPost()
+  }, [])
+
+  useEffect(() => {
+    const getCategories = async function () {
       const res = await categoriesAPI.get.categories()
       console.log(res)
       setCategories(res.data)
-      setLoading(false)
     }
-    getData()
+    getCategories()
   }, [])
 
   const handleCategoryChange = (event) => {
@@ -73,27 +82,28 @@ export default function Create() {
   }
 
   function handleChange(e) {
-    console.log(e.target.name)
     setFormData({ ...formData, [e.target.name]: e.target.value })
-    console.log(formData)
   }
 
   const handleSubmit = (ev) => {
     ev.preventDefault()
     console.log(formData)
     const insert = async function () {
-      const res = await postsAPI.post.createPost(formData)
+      const res = await postsAPI.patch.editPost(formData)
       console.log(res)
       history.push('/')
     }
     insert()
   }
 
+  if (loading) {
+    return <LinearProgress />
+  }
   return (
     <Container>
       <div className={classes.paper}>
         <Typography component="h1" variant="h1">
-          <FormattedMessage id="createPostTitle" />
+          <FormattedMessage id="editPostTitle" />
         </Typography>
         <form className={classes.form} noValidate onSubmit={handleSubmit}>
           <TextField
@@ -143,6 +153,7 @@ export default function Create() {
             label={useIntl().formatMessage({ id: 'content' })}
             type="text"
             id="content"
+            value={formData.content}
             multiline
             rows={8}
             className={classes.input}
@@ -157,7 +168,7 @@ export default function Create() {
             className={classes.submit}
           >
             <SaveIcon className={classes.saveIcon} />{' '}
-            <FormattedMessage id="savePost" />
+            <FormattedMessage id="editPost" />
           </Button>
           <ReturnButton style={{ float: 'left' }} />
         </form>
