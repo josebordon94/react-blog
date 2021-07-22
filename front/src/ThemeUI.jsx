@@ -1,6 +1,6 @@
 // import { createTheme } from '@material-ui/core/styles'
 import { unstable_createMuiStrictModeTheme as createTheme } from '@material-ui/core'
-import { deepOrange, grey, blueGrey } from '@material-ui/core/colors'
+import { red, grey, blueGrey } from '@material-ui/core/colors'
 const theme = createTheme({
   typography: {
     fontFamily: ['Roboto', 'sans-serif'],
@@ -23,7 +23,7 @@ const theme = createTheme({
       main: blueGrey[900],
     },
     secondary: {
-      main: deepOrange[800],
+      main: red[800],
     },
     text: {
       secondary: grey[800],

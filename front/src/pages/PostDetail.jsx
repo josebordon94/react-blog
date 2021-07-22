@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-function Post() {
+function PostDetail(props) {
   const classes = useStyles()
 
   const [post, setPost] = useState([])
@@ -28,7 +28,7 @@ function Post() {
 
   useEffect(() => {
     const getData = async function () {
-      const res = await postsAPI.get.postDetail(9)
+      const res = await postsAPI.get.postDetail(props.match.params.id)
       console.log(res)
       setPost(res.data)
       setLoading(false)
@@ -63,4 +63,4 @@ function Post() {
   )
 }
 
-export default Post
+export default PostDetail

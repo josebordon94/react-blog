@@ -51,7 +51,7 @@ export default function BlogCard(props) {
           Category: {category}
         </Typography>
       </CardContent>
-      <CardActions>
+      <CardActions className={classes.cardActions}>
         <Link to={'/' + id}>
           <Button
             variant="contained"

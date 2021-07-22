@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid'
 import BlogCard from '../components/BlogCard'
 import postsAPI from '../services/posts'
 import LinearProgress from '../components/LinearProgress'
+import NewPostButton from '../components/NewPostButton'
 
 const useStyles = makeStyles((theme) => ({
   blogsContainer: {
@@ -34,6 +35,7 @@ function MainBlog() {
   }
   return (
     <Container maxWidth="lg" className={classes.blogsContainer}>
+      <NewPostButton />
       <Grid container spacing={3}>
         {posts.map((post) => (
           <Grid item xs={12} sm={12} md={6} lg={4} key={post.id}>
