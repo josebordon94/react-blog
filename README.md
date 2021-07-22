@@ -29,6 +29,10 @@ Run `npm start` in back directory to start the Express API Rest, then run `npm r
 
 ## Usage
 
+### Uploading categories
+
+By the moment, you need to upload the categories manually. The service already exist (POST "api/categories") in back, but it's not implemented in front end. You will have to access manually to the database, or use an API CLient as Postman.
+
 ### Uploading, updating and deleting posts
 
 In home screen, you will see all the posts stored in database. Use the button "Create new post" to upload a new one.
