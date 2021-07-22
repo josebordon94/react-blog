@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Button from '@material-ui/core/Button'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import TextField from '@material-ui/core/TextField'
@@ -11,6 +11,9 @@ import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
 import Container from '@material-ui/core/Container'
 import { FormControl, InputLabel, Select, MenuItem } from '@material-ui/core'
+import categoriesAPI from '../services/categories'
+import postsAPI from '../services/posts'
+import SaveIcon from '@material-ui/icons/Save'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -25,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
   },
   form: {
     width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(3),
+    marginTop: theme.spacing(0.2),
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
@@ -40,15 +43,69 @@ const useStyles = makeStyles((theme) => ({
   selectEmpty: {
     marginTop: theme.spacing(2),
   },
+  saveIcon: {
+    marginRight: '4px',
+  },
 }))
 
 export default function Create() {
   const classes = useStyles()
 
-  const [age, setAge] = React.useState('')
+  const [loading, setLoading] = useState(true)
+  const [selectedCategory, setSelectedCategory] = useState('')
+  const [formData, setFormData] = useState({
+    title: '',
+    content: '',
+    image: '',
+    category_id: 1,
+  })
 
-  const handleChange = (event) => {
-    setAge(event.target.value)
+  const [categories, setCategories] = React.useState([])
+  useEffect(() => {
+    const getData = async function () {
+      const res = await categoriesAPI.get.categories()
+      console.log(res)
+      setCategories(res.data)
+      setLoading(false)
+      setSelectedCategory(1)
+    }
+    getData()
+  }, [])
+
+  const handleCategoryChange = (event) => {
+    setSelectedCategory(event.target.value)
+    setFormData({ ...formData, category_id: event.target.value })
+  }
+
+  function handleChange(e) {
+    console.log(e.target.name)
+    setFormData({ ...formData, [e.target.name]: e.target.value })
+    console.log(formData)
+  }
+
+  // const handleSubmit = (data) => {
+  //   const createUser = () => {
+  //     axios.post(apirest.apiUrl + '/users', data).then((res) => {
+  //       if (res.data.error) {
+  //         console.log('Invalid data')
+  //         setErrorMsg(res.data.message)
+  //       } else {
+  //         setErrorMsg('')
+  //         return history.push('/login') // redirect
+  //       }
+  //     })
+  //   }
+  //   createUser()
+  // }
+
+  const handleSubmit = (ev) => {
+    ev.preventDefault()
+    console.log(formData)
+    const insert = async function () {
+      const res = await postsAPI.post.createPost(formData)
+      console.log(res)
+    }
+    insert()
   }
 
   return (
@@ -57,45 +114,58 @@ export default function Create() {
         <Typography component="h1" variant="h1">
           Crear un nuevo post
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} noValidate onSubmit={handleSubmit}>
           <TextField
             autoComplete="fname"
             name="title"
             variant="outlined"
             fullWidth
-            id="firstName"
+            id="title"
             label="Título"
             autoFocus
             className={classes.input}
+            value={formData.title}
+            onChange={handleChange}
           />
 
-          <FormControl variant="filled" className={classes.formControl}>
-            <InputLabel id="demo-simple-select-filled-label">Age</InputLabel>
+          <FormControl variant="outlined" className={classes.formControl}>
             <Select
               labelId="demo-simple-select-filled-label"
-              id="demo-simple-select-filled"
-              value={age}
-              onChange={handleChange}
+              id="category"
+              value={formData.category_id}
+              onChange={handleCategoryChange}
             >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
+              {categories.map((cat) => (
+                <MenuItem value={cat.id} key={cat.id}>
+                  {cat.description}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
+
+          <TextField
+            name="image"
+            variant="outlined"
+            fullWidth
+            id="image"
+            label="URL de la imágen"
+            autoFocus
+            className={classes.input}
+            value={formData.image}
+            onChange={handleChange}
+          />
 
           <TextField
             variant="outlined"
             fullWidth
             name="content"
-            label="Password"
+            label="Contenido"
             type="text"
-            id="password"
+            id="content"
             multiline
             rows={8}
             className={classes.input}
+            onChange={handleChange}
           />
 
           <Button
@@ -105,7 +175,7 @@ export default function Create() {
             color="primary"
             className={classes.submit}
           >
-            Guardar nuevo post
+            <SaveIcon className={classes.saveIcon} /> Guardar nuevo post
           </Button>
         </form>
       </div>

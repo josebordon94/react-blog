@@ -40,7 +40,7 @@ export default function BlogCard(props) {
     <Card className={classes.card}>
       <CardMedia
         className={classes.media}
-        image="https://images.pexels.com/photos/2004161/pexels-photo-2004161.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+        image={'img/' + image}
         title="Contemplative Reptile"
       />
       <CardContent>

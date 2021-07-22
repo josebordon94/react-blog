@@ -6,7 +6,6 @@ const theme = createTheme({
     fontFamily: ['Roboto', 'sans-serif'],
     h1: {
       fontSize: '3rem',
-      paddingBottom: '0.2em',
     },
     h2: {
       fontSize: '2rem',

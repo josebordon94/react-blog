@@ -18,6 +18,9 @@ const useStyles = makeStyles((theme) => ({
   box: {
     width: '85%',
   },
+  bodyText: {
+    marginTop: '1em',
+  },
 }))
 
 function PostDetail(props) {
@@ -46,16 +49,17 @@ function PostDetail(props) {
           <Typography variant="h1" color="initial">
             {post.title}
           </Typography>
-          <Typography variant="body1" color="initial">
+          <Typography
+            variant="body1"
+            color="initial"
+            className={classes.bodyText}
+          >
             {post.content}
           </Typography>
         </Grid>
         <Grid item xs={12} sm={6}>
           <Box boxShadow={3} className={classes.box}>
-            <img
-              src="https://images.unsplash.com/photo-1566475955255-404134a79aeb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=667&q=80"
-              className={classes.image}
-            />
+            <img src={'img/' + post.image} className={classes.image} />
           </Box>
         </Grid>
       </Grid>
