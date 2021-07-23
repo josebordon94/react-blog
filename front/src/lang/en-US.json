@@ -12,6 +12,7 @@
     "savePost": "Save new post",
     "editPost": "Edit post",
     "back": "Back",
-    "error404": "The content required doesn't exist."
+    "error404": "The content required doesn't exist.",
+    "noPostsMsg": "There are no posts yet! Add one using the green button up to the right"
 
 }

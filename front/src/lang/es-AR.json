@@ -12,6 +12,7 @@
     "savePost": "Guardar nueva publicación",
     "editPost": "Editar publicación",
     "back": "Volver",
-    "error404": "El contenido solicitado no existe."
+    "error404": "El contenido solicitado no existe.",
+    "noPostsMsg": "¡Aún no hay posts! Agrega uno con el botón verde de arriba a la derecha."
 
 }

@@ -7,6 +7,7 @@ import BlogCard from '../components/BlogCard'
 import postsAPI from '../services/posts'
 import LinearProgress from '../components/LinearProgress'
 import NewPostButton from '../components/NewPostButton'
+import { FormattedMessage } from 'react-intl'
 
 const useStyles = makeStyles((theme) => ({
   blogsContainer: {
@@ -16,6 +17,9 @@ const useStyles = makeStyles((theme) => ({
     height: '100%',
     paddingTop: 5,
     backgroundColor: '#fff',
+  },
+  emptyMsg: {
+    marginTop: theme.spacing(3),
   },
 }))
 
@@ -47,6 +51,11 @@ function MainBlog() {
     <Container className={classes.blogsContainer} maxWidth="lg">
       <NewPostButton />
       <Grid container spacing={2}>
+        {posts.length === 0 ? (
+          <Typography variant="h5" color="initial" className={classes.emptyMsg}>
+            <FormattedMessage id="noPostsMsg" />
+          </Typography>
+        ) : null}
         {posts.map((post) => (
           <Grid item xs={12} sm={12} md={6} lg={4} key={post.id}>
             <BlogCard
