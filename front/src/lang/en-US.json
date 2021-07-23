@@ -3,7 +3,7 @@
     "newPost": "Add new post",
     "read": "Read",
     "inCategory": "In category",
-    "category": "Category: ",
+    "category": "Category",
     "title": "Title",
     "url": "Image URL",
     "content": "Content",
@@ -11,6 +11,7 @@
     "editPostTitle": "Edit post",
     "savePost": "Save new post",
     "editPost": "Edit post",
-    "back": "Back"
+    "back": "Back",
+    "error404": "The content required doesn't exist."
 
 }

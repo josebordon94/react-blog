@@ -54,6 +54,7 @@ function MainBlog() {
               category={post.category.description}
               image={post.image}
               id={post.id}
+              date={post.createdAt}
               reload={reload}
             />
           </Grid>

@@ -3,6 +3,7 @@ import KeyboardReturnIcon from '@material-ui/icons/KeyboardReturn'
 import Button from '@material-ui/core/Button'
 import { makeStyles } from '@material-ui/core/styles'
 import { Link } from 'react-router-dom'
+import { FormattedMessage } from 'react-intl'
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -20,7 +21,7 @@ export default function NewPostButton() {
         className={classes.button}
         startIcon={<KeyboardReturnIcon />}
       >
-        Volver
+        <FormattedMessage id="back" />
       </Button>
     </Link>
   )

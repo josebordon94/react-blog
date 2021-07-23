@@ -1,12 +1,16 @@
 import React from 'react'
+import { FormattedMessage } from 'react-intl'
 import ReturnButton from '../components/ReturnButton'
+import Container from '@material-ui/core/Container'
 
 function Error404() {
   return (
-    <div>
-      <h1>El contenido al que intenta acceder no existe.</h1>
+    <Container maxWidth="xs">
+      <h3 style={{ textAlign: 'center' }}>
+        <FormattedMessage id="error404" />
+      </h3>
       <ReturnButton />
-    </div>
+    </Container>
   )
 }
 

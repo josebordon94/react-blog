@@ -64,6 +64,7 @@ export default function Create() {
       console.log(res)
       setCategories(res.data)
       setLoading(false)
+      setFormData({ ...formData, category_id: 1 })
     }
     getData()
   }, [])

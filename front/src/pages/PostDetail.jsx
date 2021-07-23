@@ -8,6 +8,7 @@ import LinearProgress from '../components/LinearProgress'
 import Paper from '@material-ui/core/Paper'
 import ReturnButton from '../components/ReturnButton'
 import { useHistory } from 'react-router'
+import { FormattedMessage } from 'react-intl'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -22,6 +23,9 @@ const useStyles = makeStyles((theme) => ({
   },
   bodyText: {
     marginTop: '1em',
+  },
+  content: {
+    padding: theme.spacing(2),
   },
 }))
 
@@ -51,12 +55,15 @@ function PostDetail(props) {
   return (
     <Paper className={classes.paper}>
       <Grid container>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={6} className={classes.content}>
           <Typography variant="h1" color="initial">
             {post.title}
           </Typography>
           <Typography variant="subtitle2" color="initial">
-            En categoría: {post.category.description}
+            <FormattedMessage id="inCategory" />: {post.category.description}
+          </Typography>
+          <Typography variant="subtitle1" color="initial">
+            {new Date(post.createdAt).toLocaleDateString()}
           </Typography>
           <Typography
             variant="body1"

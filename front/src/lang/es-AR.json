@@ -11,6 +11,7 @@
     "editPostTitle": "Editar publicación",
     "savePost": "Guardar nueva publicación",
     "editPost": "Editar publicación",
-    "back": "Volver"
+    "back": "Volver",
+    "error404": "El contenido solicitado no existe."
 
 }

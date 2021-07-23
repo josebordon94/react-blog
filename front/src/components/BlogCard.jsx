@@ -14,6 +14,7 @@ import ImportContactsIcon from '@material-ui/icons/ImportContacts'
 import { Link, useHistory } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core'
 import postsAPI from '../services/posts'
+import { FormattedMessage } from 'react-intl'
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -33,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export default function BlogCard(props) {
-  const { title, id, image, category, reload } = props
+  const { title, id, image, category, date, reload } = props
   const classes = useStyles()
   const history = useHistory()
 
@@ -59,7 +60,10 @@ export default function BlogCard(props) {
           {title}
         </Typography>
         <Typography variant="body2" color="textSecondary" component="p">
-          Category: {category}
+          <FormattedMessage id="category" />: {category}
+        </Typography>
+        <Typography variant="body2" color="textSecondary" component="p">
+          {new Date(date).toLocaleDateString()}
         </Typography>
       </CardContent>
       <CardActions className={classes.cardActions}>
@@ -70,7 +74,7 @@ export default function BlogCard(props) {
             color="primary"
             startIcon={<ImportContactsIcon />}
           >
-            Leer
+            <FormattedMessage id="read" />
           </Button>
         </Link>
 

@@ -18,6 +18,7 @@ import TranslateIcon from '@material-ui/icons/Translate'
 import KeyboardArrowDownOutlinedIcon from '@material-ui/icons/KeyboardArrowDownOutlined'
 import { langContext } from '../context/langContext'
 import { FormattedMessage } from 'react-intl'
+import { useHistory } from 'react-router'
 
 const useStyles = makeStyles((theme) => ({
   menuButton: {
@@ -31,12 +32,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-  },
-  appBar: {
-    [theme.breakpoints.up('md')]: {
-      width: `calc(100%)`,
-    },
-    zIndex: theme.zIndex.drawer + 1,
+    cursor: 'pointer',
   },
   languagesMenu: {},
   flagIcon: {
@@ -49,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Navbar = (props) => {
   const classes = useStyles()
-
+  const history = useHistory()
   const language = useContext(langContext)
 
   //Language menu
@@ -63,10 +59,17 @@ const Navbar = (props) => {
     setAnchorEl(null)
   }
 
+  const handleClickLogo = () => {
+    history.push('/')
+  }
   return (
-    <AppBar className={classes.appBar}>
+    <AppBar>
       <Toolbar>
-        <Typography variant="h6" className={classes.title}>
+        <Typography
+          variant="h6"
+          className={classes.title}
+          onClick={handleClickLogo}
+        >
           Blog
         </Typography>
 
