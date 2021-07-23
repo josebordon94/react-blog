@@ -16,10 +16,10 @@ const useStyles = makeStyles((theme) => ({
   },
   image: {
     width: '100%',
-    maxWidth: '100%',
+    boxShadow: '10px 5px 5px black',
   },
   box: {
-    width: '85%',
+    width: '100%',
   },
   bodyText: {
     marginTop: '1em',
@@ -55,7 +55,7 @@ function PostDetail(props) {
   return (
     <Paper className={classes.paper}>
       <Grid container>
-        <Grid item xs={12} sm={6} className={classes.content}>
+        <Grid item xs={12} md={6} className={classes.content}>
           <Typography variant="h1" color="initial">
             {post.title}
           </Typography>
@@ -73,10 +73,13 @@ function PostDetail(props) {
             {post.content}
           </Typography>
         </Grid>
-        <Grid item xs={12} sm={6}>
-          <Box boxShadow={3} className={classes.box}>
-            <img src={'img/' + post.image} className={classes.image} />
-          </Box>
+        <Grid
+          item
+          xs={12}
+          md={6}
+          style={{ display: 'flex', alignItems: 'center', width: '100%' }}
+        >
+          <img src={'img/' + post.image} className={classes.image} />
         </Grid>
         <ReturnButton />
       </Grid>

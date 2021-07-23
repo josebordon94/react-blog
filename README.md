@@ -53,6 +53,8 @@ Default test images:
 - book.jpg
 - bassist.jpg
 - paint.jpg
+- basketball.jpg
+- restaurant.jpg
 
 ### Language
 
